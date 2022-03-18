@@ -9,12 +9,14 @@ from geo import get_country, get_distance, get_coordinates
 
 app = Flask(__name__)
 
-# Добавляем логирование в файл. Чтобы найти файл,
-# перейдите на pythonwhere в раздел files, он лежит в корневой папке
+# Устанавливаем уровень логирования
 logging.basicConfig(level=logging.INFO, filename='app.log',
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
+sessionStorage = {}
 
+
+@app.route('/', methods=['POST'])
 @app.route('/post', methods=['POST'])
 def main():
     logging.info('Request: %r', request.json)
@@ -59,6 +61,7 @@ def get_cities(req):
             if 'city' in entity['value']:
                 cities.append(entity['value']['city'])
     return cities
+
 
 
 if __name__ == '__main__':
