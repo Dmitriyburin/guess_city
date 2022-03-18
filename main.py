@@ -10,8 +10,7 @@ from geo import get_country, get_distance, get_coordinates
 app = Flask(__name__)
 
 # Устанавливаем уровень логирования
-logging.basicConfig(level=logging.INFO, filename='app.log',
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logging.basicConfig(level=logging.INFO)
 
 sessionStorage = {}
 
@@ -61,7 +60,6 @@ def get_cities(req):
             if 'city' in entity['value']:
                 cities.append(entity['value']['city'])
     return cities
-
 
 
 if __name__ == '__main__':
