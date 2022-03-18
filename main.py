@@ -18,7 +18,17 @@ sessionStorage = {}
 @app.route('/', methods=['POST'])
 @app.route('/post', methods=['POST'])
 def main():
-    return 'hellowrodl'
+    logging.info('Request: %r', request.json)
+    response = {
+        'session': request.json['session'],
+        'version': request.json['version'],
+        'response': {
+            'end_session': False
+        }
+    }
+    handle_dialog(response, request.json)
+    logging.info('Request: %r', response)
+    return json.dumps(response)
 
 
 def handle_dialog(res, req):
@@ -32,6 +42,7 @@ def handle_dialog(res, req):
     if not cities:
         res['response']['text'] = 'Вы не написали название ни одного города!'
     elif len(cities) == 1:
+        print(cities)
         res['response']['text'] = 'Этот город в стране - ' +\
                                   get_country(cities[0])
     elif len(cities) == 2:
@@ -53,5 +64,5 @@ def get_cities(req):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+
+    app.run()
