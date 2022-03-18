@@ -18,17 +18,7 @@ sessionStorage = {}
 @app.route('/', methods=['POST'])
 @app.route('/post', methods=['POST'])
 def main():
-    logging.info('Request: %r', request.json)
-    response = {
-        'session': request.json['session'],
-        'version': request.json['version'],
-        'response': {
-            'end_session': False
-        }
-    }
-    handle_dialog(response, request.json)
-    logging.info('Request: %r', response)
-    return json.dumps(response)
+    return 'hellowrodl'
 
 
 def handle_dialog(res, req):
